@@ -349,15 +349,15 @@ problem2a()
 
     The accuracy for each setting is:
 
-      Classification accuracy: 14.70\% for classification with $d=10$.
+      Classification accuracy: 13.80\% for classification with $d=10$.
 
-      Classification accuracy: 10.80\% for classification with $d=25$.
+      Classification accuracy: 23.10\% for classification with $d=25$.
       
-      Classification accuracy: 10.90\% for classification with $d=50$.
+      Classification accuracy: 32.00\% for classification with $d=50$.
       
-      Classification accuracy: 10.50\% for classification with $d=100$.
+      Classification accuracy: 38.00\% for classification with $d=100$.
 
-      None of the target dimensions actually achive the desired accuract without the randomized projection. However, surprisingly, the best performing parameter is $d=10$. This is also supported by the corresponding heatmap (see Figure \ref{fig:classification_d_10}),
+      The only value that is somewhat comparable is $d =100$, which achieves an accuracy close to the full similarity matching, at a much cheaper cost. This is confirmed by the corresponding heatmap (see Figure \ref{fig:classification_d_100}).
 
 \begin{verbatim}
 def random_projection(db, d: int):
@@ -369,9 +369,10 @@ def problem2c():
     db, groups_to_articles, group_names, article_to_group = read_data()
     
     for d in [10, 25, 50, 100]:
-        db = random_projection(db, d)
-        plotHeatMaps2(db, groups_to_articles,
-                      group_names, article_to_group, figName="classification_d=%s" % d)
+        projected = random_projection(db, d)
+        plotHeatMaps2(projected, groups_to_articles,
+                      group_names, article_to_group, figName="classification_d=%s" % d,
+                      nearest_neigbor_fn=find_nearest_neighbor)
 
 problem2c()
 \end{verbatim}
