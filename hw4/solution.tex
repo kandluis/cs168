@@ -101,7 +101,7 @@ that all of this is my own work.
     We see the specified plot in Figure \ref{fig:gender_nucleobase}. From this plot, we can see that the last few hundred nucleobases appears to encode information about the Y chromosone, whereas the begining few nucleobases appears to encode information about the X chromosone (larger).
 
   \item
-    We create a bijection by mapping each of $A,T,C,G$ to a one-hot encoded vector. What we mean by this is that our original matrix $X \in \mathbb{n \times d}$ where $d$ is the feature dimension, would instead become $X' \in \mathbb{n \times (d x 4)}$ where we conceptually group each of the 4 dimensions to a binary label. 
+    We create a bijection by mapping each of $A,T,C,G$ to a one-hot encoded vector. What we mean by this is that our original matrix $X \in \mathbb{R}^{n \times d}$ where $d$ is the feature dimension, would instead become $X' \in \mathbb{R}^{n \times (d x 4)}$ where we conceptually group each of the 4 dimensions to a binary label. 
 
   \item
     We recreate the plot from (b) above in Figure \ref{fig:projection_full_genome}. We do not see any immediate added value.
