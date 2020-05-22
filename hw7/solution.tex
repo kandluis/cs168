@@ -1,0 +1,68 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage,enumitem,amsmath,amssymb,graphicx}
+\usepackage{graphicx} % This is a package for including graphics in your solution.
+\usepackage{listings}
+\usepackage[final]{pdfpages}
+
+\begin{document}
+
+\begin{center}
+{\Large CS168 Spring Assignment 7}
+
+\begin{tabular}{rl}
+SUNet ID(s): 05794739 & \\
+Name(s): & Luis A. Perez \\
+Collaborators: &
+\end{tabular}
+\end{center}
+
+By turning in this assignment, I agree by the Stanford honor code and declare
+that all of this is my own work.
+
+\section*{Part 1}
+
+\begin{enumerate}[label=(\alph*)]
+  \item
+    \begin{enumerate}
+      \item The circle graph with $n=10$ is periodic and irreducible.
+
+      This is because it is bipartite. Consider partitions $A,B$ where even nodes are in $A$ and odd nodes in $B$. Then the edges $(u,v)$ exists only if $u \in A, v \in B$. As such, it has a period of $2$.
+
+      It is irreducible because one can reach any state from any other state.
+      \item The circle graph with $n=9$ is aperiodic and irreducible.
+
+      Consider any pair of distinct nodes $i,j$. WLOG, suppose $i < j$. Then we can reach $j$ from $i$ in $j-i$ steps as well as $9 - (j-i)$. Note that $j - i \in \{1, 2, 3, 4, 5, 6, 7, 8\}$ and, correspondingly, we'd have $9 - (j-i) \in \{8, 7, 6, 5, 4, 3, 2, 1\}$. The only pairs for which the GCD is not $1$ are $(3, 6), (6,3)$. However, if we can reach a node in $3$ steps, we can reach it in $5$ (just go back once and foward again). As such, even for these nodes, the GCD for times at which they are reachable is $1$.
+
+      It is irreducible because one can reach any state from any other state.
+
+      The stationary distribution $\pi$ is the uniform distribution over all states. To see why, note that all states are symmetric and interchangeable, so the stationary distribution must be uniform. There are $9$ states, so we have:
+      \[
+        \pi_i = \frac{1}{9} \text{ for all } 1 \leq i \leq 9
+      \]
+      \item The circle graph with $n=9$ and an extra edges connecting nodes $1$ and $5$ is aperiodic and irreducible.
+
+      Ignoring the extra edge, we already know it's aperiodic as per (2). As such, we only need to verify that the states $1$ and $5$ are still aperiodic. They are, since we can reach them in either $4$ steps or $5$ steps.   
+
+      It is irreducible because one can reach any state from any other state.
+
+      The stationary distribution $\pi$ is no longer uniform. However, we can compute it easily. We have $7$ nodes with two edges, and two nodes with $3$. As such, we have $2*7 + 3*2 = 20$ distributions. As such, we have:
+      \[
+        \pi_i = \frac{1}{10} \quad i \neq 3,
+      \]
+    \end{enumerate}
+  \item (your solution)
+\end{enumerate}
+
+\section*{Part 2}
+
+\begin{enumerate}[label=(\alph*)]
+  \item (your solution, with code)
+\begin{verbatim}
+def cow():
+    print ``Moo''
+\end{verbatim}
+
+  \item (your solution)
+\end{enumerate}
+
+\end{document}
