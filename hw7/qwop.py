@@ -3,20 +3,14 @@
 #
 # This python implementation was written by Okke Schrijvers for CS168
 
-import sys
 import math
 import numpy as np
-import time
-from matplotlib import pyplot as plt
-from matplotlib import animation
 import copy
-import random
-
-data = []
 
 
 # plan is an array of 40 floating point numbers
-def sim(plan):
+def sim(plan, include_data=True):
+  data = []
   for i in range(0, len(plan)):
     if plan[i] > 1:
       plan[i] = 1.0
@@ -117,14 +111,16 @@ def sim(plan):
 
       angf = [0, 0, 0, 0]
       for z in range(4):
-        ang = edgeang[angles[z][1]] - edgeang[angles[z][0]] - anglesl[z]
+        ang = edgeang[angles[z][1]] - \
+            edgeang[angles[z][0]] - anglesl[z]
         if ang > math.pi:
           ang -= 2 * math.pi
         elif ang < -math.pi:
           ang += 2 * math.pi
         m0 = dist[angles[z][0]] / edgel[angles[z][0]]
         m1 = dist[angles[z][1]] / edgel[angles[z][1]]
-        angf[z] = ang * anglessp[z] - angv[z] * anglesf[z] * min(m0, m1)
+        angf[z] = ang * anglessp[z] - \
+            angv[z] * anglesf[z] * min(m0, m1)
 
       edgetorque = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
       for z in range(5):
@@ -168,55 +164,9 @@ def sim(plan):
             v[0][z] -= fric * friction * s
         p[0][z] += v[0][z] * dt
         p[1][z] += v[1][z] * dt
-
-      data.append(copy.deepcopy(p))
+      if include_data:
+        data.append(copy.deepcopy(p))
 
       if contact[0] or contact[5]:
-        return p[0][5]
-  return p[0][5]
-
-
-###########
-# The following code is given as an example to store a video of the run and to display
-# the run in a graphics window. You will treat sim(plan) as a black box objective
-# function and maximize it.
-###########
-
-plan = [random.uniform(-1, 1) for i in range(40)]
-
-sim(plan)
-
-# draw the simulation
-fig = plt.figure()
-fig.set_dpi(100)
-fig.set_size_inches(12, 3)
-
-ax = plt.axes(xlim=(-1, 10), ylim=(0, 3))
-
-joints = [5, 0, 1, 2, 1, 0, 3, 4]
-patch = plt.Polygon([[0, 0], [0, 0]], closed=None, fill=None, edgecolor='k')
-head = plt.Circle((0, 0), radius=0.15, fc='k', ec='k')
-
-
-def init():
-  ax.add_patch(patch)
-  ax.add_patch(head)
-  return patch, head
-
-
-def animate(j):
-  points = zip([data[j][0][i] for i in joints],
-               [data[j][1][i] for i in joints])
-  patch.set_xy(list(points))
-  head.center = (data[j][0][5], data[j][1][5])
-  return patch, head
-
-
-anim = animation.FuncAnimation(fig,
-                               animate,
-                               init_func=init,
-                               frames=len(data),
-                               interval=20)
-anim.save('animation.mp4', fps=50)
-
-plt.show()
+        return p[0][5], data
+  return p[0][5], data

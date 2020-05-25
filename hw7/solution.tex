@@ -196,4 +196,26 @@ def mcmc(D, n_iters, T, route_fn):
 
 \end{enumerate}
 
+\newpage
+\section*{Part 3}
+\begin{enumerate}[label=(\alph*)]
+  \item Does not need to be submitted.
+  \item For the full code, please see the Appendix section. The input plan is given as per the below:
+  \begin{verbatim}
+  array([ 0.36,  0.49,  0.88,  0.85,  1.  ,  1.  ,  0.74,  1.  , -1.  ,
+       -0.83,  0.29,  0.16,  0.8 ,  0.73,  0.57, -0.61,  0.77,  0.95,
+       -0.96, -0.08, -0.3 , -1.  , -0.82, -1.  ,  0.95,  0.48, -1.  ,
+        0.72, -0.78, -1.  , -0.11, -0.9 ,  0.78, -0.26,  0.57,  0.15,
+        0.09, -0.88, -0.86, -0.5 ])
+  \end{verbatim}
+
+  A video of the above can be found here: https://youtu.be/kQFOffXiVMM
+  \item We achieve a distance of 9.198867470630958. Our method is a simple modification of the MCMC method used in previous parts of the assignmet. We use $T = 0$ and define neighboring states as adding a uniform random value in the range $[-0.1, 0.1]$ (so changing the vector by at most $10\%$). Our local search implies that the nearby values are also good, as long as the inputs aren't changed too much. 
+
+\end{enumerate}
+
+
+\newpage
+\includepdf[pages=-]{HW7}
+
 \end{document}
